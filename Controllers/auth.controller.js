@@ -51,9 +51,11 @@ exports.VerifyToken = async (req, res) => {
     await jwt.verify(
       req.headers.authorization,
       process.env.JWT_SECRET,
-      (error, item) => {
+      async (error, item) => {
         if (!error) {
-          res.send(item.user);
+          const user = await User.findById(item.user._id).populate("requests");
+          // console.log(user);
+          res.send(user);
         }
       }
     );

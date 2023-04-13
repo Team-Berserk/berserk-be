@@ -1,4 +1,5 @@
 const { Request } = require("../Models/request.model");
+const { User } = require("../Models/user.model");
 
 exports.getRequests = async (req, res) => {
   try {
@@ -23,6 +24,11 @@ exports.createRequest = async (req, res) => {
 
   try {
     const product = await new Request({ Date, Hour, Dentist, Author }).save();
+    const user = await User.findById(Author);
+    user.requests.push(product._id);
+    console.log(user);
+    await user.save();
+
     res.send(product);
   } catch (err) {
     res.send(err);
