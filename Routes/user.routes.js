@@ -17,7 +17,6 @@ router
   .get("/user/:id", getUser)
   .get("/verify", VerifyToken)
   .post("/signup", signupUser)
-  .post("/login", loginUser)
-  .put("/user", addUserPost);
+  .post("/login", loginUser);
 
 module.exports.userRoutes = router;
