@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 exports.signupUser = async (req, res) => {
-  const { surname, username, password } = req.body;
+  const { username, password } = req.body;
   const checkUsername = await User.findOne({ username });
   try {
     if (checkUsername)
@@ -15,7 +15,6 @@ exports.signupUser = async (req, res) => {
     const encryptedPassword = await bcrypt.hash(password, 10);
     const user = await new User({
       username,
-      surname,
       password: encryptedPassword,
       role: req.body.role || "user",
     }).save();
@@ -24,7 +23,7 @@ exports.signupUser = async (req, res) => {
     });
     res.send(token);
   } catch (err) {
-    res.status(403);  
+    res.status(403);
   }
 };
 

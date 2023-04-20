@@ -1,7 +1,7 @@
 const { Request } = require("../Models/request.model");
 const { User } = require("../Models/user.model");
 
-exports.getRequests = async (req, res) => {
+exports.getRequests = async (_req, res) => {
   try {
     const products = await Request.find({}).populate("Author");
     res.send(products);
@@ -24,7 +24,7 @@ exports.createRequest = async (req, res) => {
 
   try {
     const TimeId = `${Date}/${Hour}`;
-    const isTaken = await Request.fint({ TimeId });
+    const isTaken = await Request.findOne({ TimeId });
     if (isTaken)
       return res.send({ message: "Sorry, this time is already taken." });
     const product = await new Request({
@@ -38,10 +38,9 @@ exports.createRequest = async (req, res) => {
     user.requests.push(product._id);
     console.log(user);
     await user.save();
-
     res.send(product);
   } catch (err) {
-    res.send(err);
+    res.send("err");
   }
 };
 
