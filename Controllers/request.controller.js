@@ -23,7 +23,17 @@ exports.createRequest = async (req, res) => {
   const { Date, Hour, Dentist, Author } = req.body;
 
   try {
-    const product = await new Request({ Date, Hour, Dentist, Author }).save();
+    const TimeId = `${Date}/${Hour}`;
+    const isTaken = await Request.fint({ TimeId });
+    if (isTaken)
+      return res.send({ message: "Sorry, this time is already taken." });
+    const product = await new Request({
+      Date,
+      Hour,
+      Dentist,
+      Author,
+      TimeId,
+    }).save();
     const user = await User.findById(Author);
     user.requests.push(product._id);
     console.log(user);

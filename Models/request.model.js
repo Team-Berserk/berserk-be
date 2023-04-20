@@ -13,13 +13,15 @@ const requestSchema = new Schema({
     type: String,
     required: true,
   },
-  Author: 
-    {
-      type: Schema.Types.ObjectId,
-      ref: "users",
-    },
-  
+  Author: {
+    type: Schema.Types.ObjectId,
+    ref: "users",
+  },
 
+  TimeId: {
+    type: String,
+    required: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now(),

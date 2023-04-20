@@ -5,12 +5,12 @@ require("dotenv").config();
 
 exports.signupUser = async (req, res) => {
   const { surname, username, password } = req.body;
-  const checkUsername = await User.findOne({ username }, { password: 0 });
+  const checkUsername = await User.findOne({ username });
   try {
     if (checkUsername)
       return res.status(401).send("Username is already in use");
     if (!username || !password)
-      return res.status(401).send("Username & Password not found!");
+      return res.status(401).send("Username & Password required!");
 
     const encryptedPassword = await bcrypt.hash(password, 10);
     const user = await new User({
@@ -24,7 +24,7 @@ exports.signupUser = async (req, res) => {
     });
     res.send(token);
   } catch (err) {
-    res.status(403);
+    res.status(403);  
   }
 };
 
