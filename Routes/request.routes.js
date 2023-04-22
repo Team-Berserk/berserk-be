@@ -13,7 +13,7 @@ router
   .get("/requests", getRequests)
   .get("/request/:id", getRequest)
   .post("/request", createRequest)
-  .delete("/request/:id", deleteRequest)
-  .get("/availableTimes", availableTimes);
+  .put("/availableTimes", availableTimes)
+  .delete("/request/:id", deleteRequest);
 
 module.exports.requestRoutes = router;

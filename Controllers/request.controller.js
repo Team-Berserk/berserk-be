@@ -52,9 +52,10 @@ exports.deleteRequest = async (req, res) => {
   }
 };
 exports.availableTimes = async (req, res) => {
-  const Date = req.body.date;
+  const { Date } = req.body;
+  // console.log(Date);
   const allTimes = [];
-  const takenTimes = await Request.find(Date);
+  const takenTimes = await Request.find({ Date });
   takenTimes.forEach((itm) => {
     allTimes.push(itm.Hour);
   });
