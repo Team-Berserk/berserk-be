@@ -25,8 +25,7 @@ exports.createRequest = async (req, res) => {
   try {
     const TimeId = `${Date}/${Hour}`;
     const isTaken = await Request.findOne({ TimeId });
-    if (isTaken)
-      return res.send({ message: "177013" });
+    if (isTaken) return res.send({ message: "177013" });
     const product = await new Request({
       Date,
       Hour,
@@ -51,4 +50,14 @@ exports.deleteRequest = async (req, res) => {
   } catch (error) {
     res.send(error);
   }
+};
+exports.availableTimes = async (req, res) => {
+  const { Date } = req.body;
+  // console.log(Date);
+  const allTimes = [];
+  const takenTimes = await Request.find({ Date });
+  takenTimes.forEach((itm) => {
+    allTimes.push(itm.Hour);
+  });
+  res.send(allTimes);
 };

@@ -22,5 +22,8 @@ app.get("/", (_req, res) => {
 });
 
 app.listen(port, () => {
+  const array = [1, 1, 2, 3, 4];
+  const index = array.indexOf(1);
+  console.log(index);
   console.log(`🚀🚀🚀 Listening on port ${port} 🚀🚀🚀`);
 });
