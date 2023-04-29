@@ -16,7 +16,6 @@ exports.signupUser = async (req, res) => {
     const user = await new User({
       username,
       password: encryptedPassword,
-      role: req.body.role || "user",
     }).save();
     const token = jwt.sign({ user }, process.env.JWT_SECRET, {
       expiresIn: "24h",
@@ -48,7 +47,7 @@ exports.VerifyToken = async (req, res) => {
   if (!req.headers.authorization) return res.send("Token Required");
 
   try {
-    await jwt.verify(
+    jwt.verify(
       req.headers.authorization,
       process.env.JWT_SECRET,
       async (error, item) => {
