@@ -53,11 +53,15 @@ exports.deleteRequest = async (req, res) => {
 }
 exports.availableTimes = async (req, res) => {
   const { Date } = req.body
-  // console.log(Date);
   const allTimes = []
   const takenTimes = await Request.find({ Date })
   takenTimes.forEach((itm) => {
     allTimes.push(itm.Hour)
   })
   res.send(allTimes)
+}
+exports.manageByDates = async (req, res) => {
+  const Date = req.params.date
+  const allTimes = await Request.find({ Date })
+  req.send(allTimes)
 }
