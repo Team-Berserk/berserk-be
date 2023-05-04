@@ -22,6 +22,10 @@ const requestSchema = new Schema({
     type: String,
     required: true,
   },
+  User: {
+    type: String,
+    required: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now(),
