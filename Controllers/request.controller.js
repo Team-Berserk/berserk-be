@@ -20,7 +20,7 @@ exports.getRequest = async (req, res) => {
 };
 
 exports.createRequest = async (req, res) => {
-  const { Date, Hour, Dentist, Author, User } = req.body;
+  const { Date, Hour, Dentist, Author } = req.body;
 
   try {
     const TimeId = `${Date}/${Hour}`;
@@ -32,7 +32,6 @@ exports.createRequest = async (req, res) => {
       Dentist,
       Author,
       TimeId,
-      User,
     }).save();
     const user = await User.findById(Author);
     user.requests.push(product._id);
@@ -40,7 +39,7 @@ exports.createRequest = async (req, res) => {
     await user.save();
     res.send(product);
   } catch (err) {
-    res.send("err");
+    res.send(err);
   }
 };
 
