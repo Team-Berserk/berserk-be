@@ -20,7 +20,8 @@ exports.getRequest = async (req, res) => {
 };
 
 exports.createRequest = async (req, res) => {
-  const { Date, Hour, Dentist, Author } = req.body;
+  const { Date, Hour, Author, Surename, Ownername, Registration, Phonenumber } =
+    req.body;
 
   try {
     const TimeId = `${Date}/${Hour}`;
@@ -29,9 +30,12 @@ exports.createRequest = async (req, res) => {
     const product = await new Request({
       Date,
       Hour,
-      Dentist,
       Author,
       TimeId,
+      Ownername,
+      Registration,
+      Surename,
+      Phonenumber,
     }).save();
     const user = await User.findById(Author);
     user.requests.push(product._id);

@@ -5,17 +5,35 @@ const requestSchema = new Schema({
     type: String,
     required: true,
   },
+
   Hour: {
     type: String,
     required: true,
   },
-  Dentist: {
-    type: String,
-    required: true,
-  },
+
   Author: {
     type: Schema.Types.ObjectId,
     ref: "users",
+  },
+
+  Surename: {
+    type: String,
+    required: true,
+  },
+
+  Ownername: {
+    type: String,
+    required: true,
+  },
+
+  Registration: {
+    type: String,
+    required: true,
+  },
+
+  Phonenumber: {
+    type: String,
+    required: true,
   },
 
   TimeId: {
