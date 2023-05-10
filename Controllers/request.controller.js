@@ -103,6 +103,7 @@ exports.manageByDates = async (req, res) => {
   }
   try {
     const Date = req.body.date
+    console.log(Date)
     const allTimes = await Request.find({ Date })
     allTimes.forEach((itm) => {
       placeholder[itm.Hour] = itm
