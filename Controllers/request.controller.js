@@ -106,9 +106,9 @@ exports.manageByDates = async (req, res) => {
     const allTimes = await Request.find({ Date })
     allTimes.forEach((itm) => {
       placeholder[itm.Hour] = itm
-      console.log(placeholder[itm.Hour])
+      console.log(itm.Hour)
     })
-    console.log(placeholder)
+    // console.log(placeholder)
     res.send({ placeholder })
   } catch (err) {
     res.send('Aldaa garlaa')
