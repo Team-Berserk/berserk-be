@@ -1,6 +1,7 @@
 const { Request } = require('../Models/request.model')
 const { User } = require('../Models/user.model')
 
+
 exports.getRequests = async (_req, res) => {
   try {
     const products = await Request.find({}).populate('Author')
