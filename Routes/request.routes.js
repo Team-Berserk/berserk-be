@@ -15,7 +15,7 @@ const {
 const router = express.Router()
 
 router
-  .get('/requests', isAdmin, getRequests)
+  .get('/requests/:doctorId', isAdmin, getRequests)
   .get('/request/:id', getRequest)
   .put('/manage', manageByDates)
   .post('/request', isLoggedIn, createRequest)

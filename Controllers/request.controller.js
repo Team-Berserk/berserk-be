@@ -1,12 +1,15 @@
 const { Request } = require('../Models/request.model')
 const { User } = require('../Models/user.model')
 
-exports.getRequests = async (_req, res) => {
+exports.getRequests = async (req, res) => {
+  const { doctorId } = req.params
+
   try {
-    const products = await Request.find({}).populate('Author')
-    res.send(products)
-  } catch (err) {
-    res.send(err)
+    const appointments = await Request.find({ Doctor: doctorId })
+    res.send(appointments)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'An error occurred' })
   }
 }
 
