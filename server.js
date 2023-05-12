@@ -1,6 +1,6 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
 const connect = require("./config/db");
 const { userRoutes } = require("./Routes/user.routes");
 const { requestRoutes } = require("./Routes/request.routes");
@@ -24,8 +24,5 @@ app.get("/", (_req, res) => {
 });
 
 app.listen(port, () => {
-  const array = [1, 1, 2, 3, 4];
-  const index = array.indexOf(1);
-  console.log(index);
   console.log(`🚀🚀🚀 Listening on port ${port} 🚀🚀🚀`);
 });
