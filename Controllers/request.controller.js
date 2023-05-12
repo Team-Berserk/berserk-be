@@ -12,7 +12,9 @@ exports.getRequests = async (_req, res) => {
 
 exports.getRequest = async (req, res) => {
   try {
-    const products = await Request.findById(req.params.id).populate('Author')
+    const products = await Request.findById(req.params.id)
+      .populate('Author')
+      .populate('doctors')
     res.send(products)
   } catch (err) {
     res.send(err)
@@ -25,8 +27,8 @@ exports.createRequest = async (req, res) => {
     Hour,
     Author,
     Surename,
+    Doctor,
     Ownername,
-    Registration,
     Phonenumber,
   } = req.body
 
@@ -34,19 +36,19 @@ exports.createRequest = async (req, res) => {
     const TimeId = `${Date}/${Hour}`
     const isTaken = await Request.findOne({ TimeId })
     if (isTaken) return res.send({ message: '177013' })
+    console.log('user')
     const product = await new Request({
       Date,
       Hour,
       Author,
+      Doctor,
       TimeId,
       Ownername,
-      Registration,
       Surename,
       Phonenumber,
     }).save()
     const user = await User.findById(Author)
     user.requests.push(product._id)
-    console.log(user)
     await user.save()
     res.send(product)
   } catch (err) {
@@ -101,9 +103,9 @@ exports.manageByDates = async (req, res) => {
   placeholder['18:00'] = {
     name: null,
   }
+
   try {
     const Date = req.body.date
-    console.log(Date)
     const allTimes = await Request.find({ Date })
     allTimes.forEach((itm) => {
       placeholder[itm.Hour] = itm

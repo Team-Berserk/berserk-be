@@ -7,7 +7,10 @@ const {
   availableTimes,
   manageByDates,
 } = require('../Controllers/request.controller')
-const { isAdmin } = require('../config/Middlewares/auth.middlewares')
+const {
+  isAdmin,
+  isLoggedIn,
+} = require('../config/Middlewares/auth.middlewares')
 
 const router = express.Router()
 
@@ -15,7 +18,7 @@ router
   .get('/requests', isAdmin, getRequests)
   .get('/request/:id', getRequest)
   .put('/manage', manageByDates)
-  .post('/request', createRequest)
+  .post('/request', isLoggedIn, createRequest)
   .put('/availableTimes', availableTimes)
   .delete('/request/:id', deleteRequest)
 
