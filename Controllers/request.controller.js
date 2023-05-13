@@ -1,5 +1,4 @@
 const { Request } = require("../Models/request.model");
-const { User } = require("../Models/user.model");
 
 exports.getRequests = async (req, res) => {
   const { doctorId } = req.params;
