@@ -67,6 +67,8 @@ exports.availableTimes = async (req, res) => {
   }
 };
 exports.manageByDates = async (req, res) => {
+  const { doctorId } = req.params;
+
   const placeholder = {};
   placeholder["10:00"] = {
     name: null,
@@ -95,7 +97,7 @@ exports.manageByDates = async (req, res) => {
 
   try {
     const Date = req.body.date;
-    const allTimes = await Request.find({ Date });
+    const allTimes = await Request.find({ Date, Doctor: doctorId });
     allTimes.forEach((itm) => {
       placeholder[itm.Hour] = itm;
       console.log(itm.Hour);
