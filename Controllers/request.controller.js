@@ -39,9 +39,6 @@ exports.createRequest = async (req, res) => {
       Surename,
       Phonenumber,
     }).save();
-    const user = await User.findById(Author);
-    user.requests.push(product._id);
-    await user.save();
     res.send(product);
   } catch (err) {
     res.send(err);
