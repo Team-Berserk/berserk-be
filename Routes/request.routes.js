@@ -1,4 +1,4 @@
-const express = require('express')
+const express = require("express");
 const {
   createRequest,
   getRequests,
@@ -6,20 +6,17 @@ const {
   getRequest,
   availableTimes,
   manageByDates,
-} = require('../Controllers/request.controller')
-const {
-  isAdmin,
-  isLoggedIn,
-} = require('../config/Middlewares/auth.middlewares')
+} = require("../Controllers/request.controller");
+const { isAdmin } = require("../config/Middlewares/auth.middlewares");
 
-const router = express.Router()
+const router = express.Router();
 
 router
-  .get('/requests/:doctorId', isAdmin, getRequests)
-  .get('/request/:id', getRequest)
-  .put('/manage', manageByDates)
-  .post('/request', isLoggedIn, createRequest)
-  .put('/availableTimes', availableTimes)
-  .delete('/request/:id', deleteRequest)
+  .get("/requests/:doctorId", isAdmin, getRequests)
+  .get("/request/:id", getRequest)
+  .put("/manage", manageByDates)
+  .post("/request", createRequest)
+  .put("/availableTimes", availableTimes)
+  .delete("/request/:id", deleteRequest);
 
-module.exports.requestRoutes = router
+module.exports.requestRoutes = router;
