@@ -24,4 +24,4 @@ const isAdmin = async (req, res, next) => {
   }
 };
 
-module.exports = { isAdmin, isLoggedIn };
+module.exports = { isAdmin };
