@@ -1,10 +1,11 @@
+const { Doctor } = require("../Models/doctor.model");
 const { Request } = require("../Models/request.model");
 
 exports.getRequests = async (req, res) => {
   const { doctorId } = req.params;
 
   try {
-    const appointments = await Request.find({ Doctor: doctorId });
+    const appointments = await Request.find({ Dentist: doctorId });
     res.send(appointments);
   } catch (error) {
     console.error(error);
@@ -14,7 +15,7 @@ exports.getRequests = async (req, res) => {
 
 exports.getRequest = async (req, res) => {
   try {
-    const products = await Request.findById(req.params.id).populate("Doctor");
+    const products = await Request.findById(req.params.id).populate(" Dentist");
     res.send(products);
   } catch (err) {
     res.send(err);
@@ -22,17 +23,18 @@ exports.getRequest = async (req, res) => {
 };
 
 exports.createRequest = async (req, res) => {
-  const { Date, Hour, Surename, Doctor, Ownername, Phonenumber } = req.body;
+  const { Date, Hour, Surename, Dentist, Ownername, Phonenumber } = req.body;
 
   try {
-    const TimeId = `${Date}/${Hour}`;
+    const DoctorId = await Doctor.findById(Dentist);
+    console.log(DoctorId);
+    const TimeId = `${Dentist}/${Date}/${Hour}`;
     const isTaken = await Request.findOne({ TimeId });
     if (isTaken) return res.send({ message: "177013" });
-    console.log("user");
     const product = await new Request({
       Date,
       Hour,
-      Doctor,
+      Dentist: DoctorId,
       TimeId,
       Ownername,
       Surename,
@@ -54,10 +56,10 @@ exports.deleteRequest = async (req, res) => {
 };
 exports.availableTimes = async (req, res) => {
   try {
-  const { doctorId } = req.params;
+    const { doctorId } = req.params;
     const { Date } = req.body;
     const allTimes = [];
-    const takenTimes = await Request.find({ Date,Doctor:doctorId });
+    const takenTimes = await Request.find({ Date, Dentist: doctorId });
     takenTimes.forEach((itm) => {
       allTimes.push(itm.Hour);
     });
@@ -97,7 +99,7 @@ exports.manageByDates = async (req, res) => {
 
   try {
     const Date = req.body.date;
-    const allTimes = await Request.find({ Date, Doctor: doctorId });
+    const allTimes = await Request.find({ Date, Dentist: doctorId });
     allTimes.forEach((itm) => {
       placeholder[itm.Hour] = itm;
       console.log(itm.Hour);

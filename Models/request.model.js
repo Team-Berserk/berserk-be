@@ -11,7 +11,7 @@ const requestSchema = new Schema({
     required: true,
   },
 
-  Doctor: {
+  Dentist: {
     type: Schema.Types.ObjectId,
     ref: "doctors",
   },
