@@ -54,9 +54,10 @@ exports.deleteRequest = async (req, res) => {
 };
 exports.availableTimes = async (req, res) => {
   try {
+  const { doctorId } = req.params;
     const { Date } = req.body;
     const allTimes = [];
-    const takenTimes = await Request.find({ Date });
+    const takenTimes = await Request.find({ Date,Doctor:doctorId });
     takenTimes.forEach((itm) => {
       allTimes.push(itm.Hour);
     });

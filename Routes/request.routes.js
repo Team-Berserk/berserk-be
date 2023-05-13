@@ -14,9 +14,9 @@ const router = express.Router();
 router
   .get("/requests/:doctorId", isAdmin, getRequests)
   .get("/request/:id", getRequest)
-  .put("/manage/:doctorId", manageByDates)
   .post("/request", createRequest)
-  .put("/availableTimes", availableTimes)
+  .put("/manage/:doctorId", manageByDates)
+  .put("/availableTimes/:doctorId", availableTimes)
   .delete("/request/:id", deleteRequest);
 
 module.exports.requestRoutes = router;
