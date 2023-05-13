@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose')
+const { Schema, model } = require("mongoose");
 
 const requestSchema = new Schema({
   Date: {
@@ -11,13 +11,9 @@ const requestSchema = new Schema({
     required: true,
   },
 
-  Author: {
-    type: Schema.Types.ObjectId,
-    ref: 'users',
-  },
   Doctor: {
     type: Schema.Types.ObjectId,
-    ref: 'doctors',
+    ref: "doctors",
   },
   Surename: {
     type: String,
@@ -43,8 +39,8 @@ const requestSchema = new Schema({
     type: Date,
     default: Date.now(),
   },
-})
+});
 
-const Request = model('requests', requestSchema)
+const Request = model("requests", requestSchema);
 
-module.exports.Request = Request
+module.exports.Request = Request;
