@@ -15,7 +15,7 @@ exports.getRequests = async (req, res) => {
 
 exports.getRequest = async (req, res) => {
   try {
-    const products = await Request.findById(req.params.id).populate("doctors");
+    const products = await Request.findById(req.params.id).populate("Doctor");
     res.send(products);
   } catch (err) {
     res.send(err);
