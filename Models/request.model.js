@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose')
 
 const requestSchema = new Schema({
   Date: {
@@ -13,7 +13,7 @@ const requestSchema = new Schema({
 
   Dentist: {
     type: Schema.Types.ObjectId,
-    ref: "doctors",
+    ref: 'doctors',
   },
 
   Surename: {
@@ -40,8 +40,12 @@ const requestSchema = new Schema({
     type: Date,
     default: Date.now(),
   },
-});
+  Attendance: {
+    type: Boolean,
+    default: null,
+  },
+})
 
-const Request = model("requests", requestSchema);
+const Request = model('requests', requestSchema)
 
-module.exports.Request = Request;
+module.exports.Request = Request

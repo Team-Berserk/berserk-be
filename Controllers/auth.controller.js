@@ -44,7 +44,7 @@ exports.loginUser = async (req, res) => {
 
 exports.VerifyToken = async (req, res) => {
   if (!req.headers.authorization) return res.send('Token Required')
-
+  // console.log('vrifying')
   try {
     jwt.verify(
       req.headers.authorization,
