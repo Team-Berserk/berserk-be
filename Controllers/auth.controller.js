@@ -43,20 +43,16 @@ exports.loginUser = async (req, res) => {
 }
 
 exports.VerifyToken = async (req, res) => {
-  if (!req.headers.authorization) return res.send('Token Required')
-  // console.log('vrifying')
+  const token = req.headers.authorization
+  if (!token) return res.send('Token Required')
+  // console.log(token)
   try {
-    jwt.verify(
-      req.headers.authorization,
-      process.env.JWT_SECRET,
-      async (error, item) => {
-        if (!error) {
-          const user = await User.findById(item.user._id).populate('requests')
-          // console.log(user);
-          res.send(user)
-        }
-      },
-    )
+    jwt.verify(token, process.env.JWT_SECRET, async (error, item) => {
+      if (error) return res.send('Expired')
+      const user = await User.findById(item.user._id).populate('requests')
+      // console.log(user);
+      res.send(user)
+    })
   } catch (error) {
     res.status(401)
   }
