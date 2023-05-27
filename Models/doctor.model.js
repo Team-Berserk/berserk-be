@@ -10,6 +10,9 @@ const doctorSchema = new Schema({
   Skills: {
     type: String,
   },
+  Img: {
+    type: String,
+  },
 
   createdAt: {
     type: Date,
