@@ -36,7 +36,6 @@ exports.postDoctor = async (req, res) => {
 exports.addImage = async (req, res) => {
   try {
     const { imgUrl } = req.body;
-    console.log(imgUrl);
     const result = await Doctor.findById(req.params.id);
     result.Img = imgUrl;
     result.save();
